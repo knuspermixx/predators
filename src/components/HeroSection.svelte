@@ -76,7 +76,7 @@
     </h1>
     <p class="fade-in" style="animation-delay: 0.8s;">Erlebe die nächste Stufe des Kampfsporttrainings.</p>
     <div class="button-group fade-in" style="animation-delay: 1s;">
-      <a href="#schedule" class="btn btn-secondary">Zeitplan ansehen</a>
+      <a href="#schedule" class="btn btn-secondary">Traingsplan</a>
       <a href="#pricing" class="btn btn-primary glow-button">Jetzt beitreten</a>
     </div>
   </div>
@@ -122,11 +122,11 @@
   }
 
   .glow-text {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3);
   }
 
   .glow-button {
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 10x rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5);
   }
 
   .navbar {

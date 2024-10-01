@@ -12,7 +12,7 @@
     { 
       day: 'Mittwoch', 
       classes: [
-        { time: '19:30', name: 'Freies Training', icon: 'boxing-glove', description: 'Wettkampfvorbereitung und Sparring (Für Fortgeschrittene, aber auch für Anfänger)', instructor: 'Thomas Kipfer' }
+        { time: '19:30', name: 'Freies Training', icon: 'boxing-glove', description: 'Wettkampfvorbereitung und Sparring für Fortgeschrittene, aber auch für Anfänger', instructor: 'Thomas Kipfer' }
       ]
     },
     { 
