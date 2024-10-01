@@ -141,7 +141,7 @@
     z-index: 1000;
     padding: 1rem 0;
     transition: all 0.5s ease;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(2px);
   }
 
   .navbar.scrolled {

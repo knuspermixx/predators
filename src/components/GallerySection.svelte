@@ -51,7 +51,7 @@
 
 <section class="gallery" class:visible>
   <div class="container">
-    <h2 class="slide-in">Predators in Aktion</h2>
+    <h2 class="slide-in">Unser Gym</h2>
     <div class="image-grid">
       {#each images as image, index}
         <div class="image-item fade-in {image.size}" on:click={() => openLightbox(image)} style="animation-delay: {index * 0.1}s">
@@ -236,17 +236,12 @@
       margin-bottom: 3rem;
     }
 
+    .container {
+      padding: 0 1rem;
+    }
+
     .image-grid {
-      grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: 150px;
-    }
-
-    .image-item.large {
-      grid-column: span 4;
-    }
-
-    .image-item.medium {
-      grid-column: span 2;
+      gap: 0.5rem;
     }
   }
 
@@ -261,19 +256,7 @@
     }
 
     .image-grid {
-      grid-template-columns: repeat(2, 1fr);
-      grid-auto-rows: 120px;
-    }
-
-    .image-item.large,
-    .image-item.medium {
-      grid-column: span 2;
-      grid-row: span 2;
-    }
-
-    .image-item.small {
-      grid-column: span 1;
-      grid-row: span 1;
+      grid-auto-rows: 150px;
     }
   }
 
@@ -283,18 +266,11 @@
     }
 
     .image-grid {
-      grid-template-columns: 1fr;
-      grid-auto-rows: auto;
-    }
-
-    .image-item {
-      grid-column: span 1 !important;
-      grid-row: span 1 !important;
-      height: 200px;
+      grid-auto-rows: 100px;
     }
 
     .container {
-      padding: 0 1rem;
+      padding: 0 0.5rem;
     }
   }
 </style>
