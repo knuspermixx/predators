@@ -93,11 +93,7 @@
 </section>
 
 <style>
-  :global(body) {
-    background-color: #000;
-    color: #fff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  }
+
 
   a {
     text-decoration: none;
@@ -150,7 +146,6 @@
   }
 
   .navbar .container {
-    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -399,6 +394,10 @@
       padding: 0 1rem;
     }
 
+    .navbar .container {
+      padding: 1rem;
+    }
+
     .menu-toggle {
       display: block;
       position: relative;
@@ -464,6 +463,14 @@
   }
 
   @media (max-width: 480px) {
+    .hero-content {
+      padding: 0 1rem;
+    }
+
+    .navbar .container {
+      padding: 1rem;
+    }
+    
     h1 {
       font-size: 3.5rem;
     }

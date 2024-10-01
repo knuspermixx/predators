@@ -51,7 +51,7 @@
 
 <section class="gallery" class:visible>
   <div class="container">
-    <h2 class="slide-in">Unser Gym</h2>
+    <h2 class="slide-in">Predators in Aktion</h2>
     <div class="image-grid">
       {#each images as image, index}
         <div class="image-item fade-in {image.size}" on:click={() => openLightbox(image)} style="animation-delay: {index * 0.1}s">

@@ -51,7 +51,8 @@
 <section class="opening-hours" class:visible>
   <div class="container">
     <h2 class="slide-in">Trainingsplan</h2>
-    <p class="intro-text fade-in">Entdecken Sie unseren vielseitigen Trainingsplan bei Predators Gym. Wir bieten Kurse für alle Altersgruppen und Erfahrungsstufen. Kommen Sie vorbei und erleben Sie die Faszination des Kampfsports!</p>
+    <p class="intro-text fade-in">Entdecken Sie unseren abwechslungsreichen Trainingsplan im Predators Gym. Egal ob Anfänger oder Fortgeschrittene – bei uns findet jeder das passende Training. Besuchen Sie uns und erleben Sie Kampfsport hautnah!</p>
+    
     <div class="schedule-grid">
       {#each schedule as { day, classes }, index}
         <div class="schedule-item fade-in" style="animation-delay: {index * 0.1}s">
@@ -95,9 +96,10 @@
         </div>
       {/each}
     </div>
+
     <div class="cta-container fade-in">
-      <p class="cta-text">Bereit, Ihre Kampfsport-Reise zu beginnen?</p>
-      <a href="#contact" class="btn btn-primary glow-button">Kostenlose Probestunde Buchen</a>
+      <p class="cta-text">Neugierig geworden? Klicke hier, um zu erfahren, wo du uns findest:</p>
+      <a href="#location" class="btn btn-primary glow-button">Standort anzeigen</a>
     </div>
   </div>
 </section>

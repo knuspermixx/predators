@@ -8,6 +8,7 @@
   import GallerySection from './components/GallerySection.svelte';
   import FAQSection from './components/FAQSection.svelte';
   import LocationSection from './components/LocationSection.svelte';
+  import Footer from './components/Footer.svelte';
   let scrollY;
 
   onMount(() => {
@@ -54,6 +55,7 @@
   <BlogSection />
   <FAQSection />
   <LocationSection />
+  <Footer />
 </main>
 
 

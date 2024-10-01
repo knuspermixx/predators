@@ -83,15 +83,15 @@
 
 <style>
   .faq {
-    /* padding: 8rem 0; */
+    padding: 8rem 0;
     background-color: #111;
     color: #fff;
   }
 
-  /* .container {
+  .container {
     margin: 0 auto;
     padding: 0 2rem;
-  } */
+  }
 
   h2 {
     text-align: center;
@@ -99,6 +99,7 @@
     font-size: 3.5rem;
     font-weight: 700;
     letter-spacing: -0.02em;
+
   }
 
   .faq-list {
