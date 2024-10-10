@@ -37,7 +37,7 @@
 </script>
 
 <video bind:this={videoElement} autoplay muted loop playsinline style="width: 100%; overflow: hidden;">
-  <source src="/videohd.mp4" type="video/mp4">
+  <!-- <source src="/videohd.mp4" type="video/mp4"> -->
   Ihr Browser unterstützt das Video-Tag nicht.
 </video>
 <div class="overlay"></div>
