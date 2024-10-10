@@ -1,14 +1,15 @@
 <script>
   import { onMount } from 'svelte';
-  import HeroSection from './components/HeroSection.svelte';
-  import AboutSection from './components/AboutSection.svelte';
-  import OpeningHoursSection from './components/OpeningHoursSection.svelte';
-  import TrainerSection from './components/TrainerSection.svelte';
-  import BlogSection from './components/BlogSection.svelte';
-  import GallerySection from './components/GallerySection.svelte';
-  import FAQSection from './components/FAQSection.svelte';
-  import LocationSection from './components/LocationSection.svelte';
-  import Footer from './components/Footer.svelte';
+  import HeroSection from './sections/hero/HeroSection.svelte';
+  import AboutSection from './sections/about/AboutSection.svelte';
+  import OpeningHoursSection from './sections/opening-hours/OpeningHoursSection.svelte';
+  import GallerySection from './sections/gallery/GallerySection.svelte';
+  import TrainerSection from './sections/trainer/TrainerSection.svelte';
+  import BlogSection from './sections/blog/BlogSection.svelte';
+  import LocationSection from './sections/location/LocationSection.svelte';
+  import Footer from './sections/footer/Footer.svelte';
+  import FaqSection from './sections/faq/FAQSection.svelte';
+ 
   let scrollY;
 
   onMount(() => {
@@ -53,7 +54,7 @@
   <GallerySection />
   <TrainerSection />
   <BlogSection />
-  <FAQSection />
+  <FaqSection />
   <LocationSection />
   <Footer />
 </main>

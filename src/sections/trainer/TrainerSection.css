@@ -1,0 +1,135 @@
+:root {
+  --background-color: #111;
+  --text-color: #fff;
+  --primary-color: #f0f0f0;
+  --accent-color: #e0e0e0;
+  --secondary-text-color: #bbb;
+  --transition-duration: 0.3s;
+}
+
+.trainers {
+  padding-block: clamp(4rem, 10vw, 8rem);
+  background-color: var(--background-color);
+  color: var(--text-color);
+
+  .container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 2rem;
+  }
+
+  h2 {
+    text-align: center;
+    margin-block-end: clamp(2rem, 6vw, 4rem);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .trainer-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .trainer-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .trainer-image {
+    width: clamp(150px, 30vw, 200px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-block-end: 1rem;
+    box-shadow: 0 10px 20px rgb(0 0 0 / 0.2);
+  }
+
+  .trainer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .trainer-info h3 {
+    font-size: clamp(1.5rem, 3vw, 1.8rem);
+    margin-block-end: 0.5rem;
+    color: var(--primary-color);
+  }
+
+  .trainer-info h4 {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    margin-block-end: 1rem;
+    color: var(--accent-color);
+  }
+
+  .trainer-info p {
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    line-height: 1.6;
+    color: var(--secondary-text-color);
+  }
+
+  .trainer-mobile-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trainer-slide {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .trainer-slide.active {
+    display: flex;
+  }
+
+  .mobile-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block-start: 1rem;
+  }
+
+  .mobile-navigation button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    cursor: pointer;
+  }
+
+  .mobile-navigation span {
+    margin-inline: 1rem;
+    color: var(--secondary-text-color);
+  }
+
+  .slide-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .visible .slide-in,
+  .visible .fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .trainer-grid {
+      flex-direction: column;
+    }
+  }
+}

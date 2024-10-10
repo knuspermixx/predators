@@ -24,9 +24,9 @@
 }
 
 @keyframes glow {
-  0% { box-shadow: 0 0 5px var(--accent-color); }
-  50% { box-shadow: 0 0 20px var(--accent-color), 0 0 30px var(--accent-color); }
-  100% { box-shadow: 0 0 5px var(--accent-color); }
+  0% { box-shadow: 0 0 2px var(--accent-color); }
+  50% { box-shadow: 0 0 10px var(--accent-color), 0 0 15px var(--accent-color); }
+  100% { box-shadow: 0 0 2px var(--accent-color); }
 }
 
 @keyframes floatAnimation {
