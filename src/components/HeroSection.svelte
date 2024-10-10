@@ -4,20 +4,26 @@
   let visible = false;
   let menuOpen = false;
   let scrolled = false;
+  let videoLoaded = false;
 
   function toggleMenu() {
     menuOpen = !menuOpen;
   }
 
-  onMount(() => {
-    if (videoElement) {
-      videoElement.playbackRate = 0.75;
+  function loadVideo() {
+    if (videoElement && !videoLoaded) {
+      videoElement.src = "/videohd.mp4";
+      videoElement.load();
+      videoLoaded = true;
     }
+  }
 
+  onMount(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           visible = true;
+          loadVideo();
         }
       });
     }, { threshold: 0.1 });
@@ -36,10 +42,23 @@
   });
 </script>
 
-<video bind:this={videoElement} autoplay muted loop playsinline style="width: 100%; overflow: hidden;">
-  <!-- <source src="/videohd.mp4" type="video/mp4"> -->
-  Ihr Browser unterstützt das Video-Tag nicht.
-</video>
+<div class="video-container">
+  <video 
+    bind:this={videoElement}
+    autoplay 
+    muted 
+    loop 
+    playsinline
+    style="width: 100%; height: 100%; object-fit: cover;"
+  >
+    <source type="video/mp4">
+    Ihr Browser unterstützt das Video-Tag nicht.
+  </video>
+  {#if !videoLoaded}
+    <div class="video-placeholder"></div>
+  {/if}
+</div>
+
 <div class="overlay"></div>
 
 <section class="hero" class:visible>
