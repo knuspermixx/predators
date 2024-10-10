@@ -4,29 +4,51 @@
   const trainers = [
     {
       name: 'Thomas Kipfer',
-      role: 'Gründer und Leiter des Gyms, Erwachsenentrainer',
+      role: 'Gründer & Erwachsenentrainer',
       image: 'https://picsum.photos/200/200?random=1',
-      bio: 'Mit über 20 Jahren Erfahrung in Kampfsportarten bringt Thomas Leidenschaft und Expertise in jede Klasse. Seine Hingabe zum Sport und zu seinen Schülern hat Predators zu einem führenden Namen im Kampfsporttraining gemacht. Als Gründer und Leiter des Gyms setzt er kontinuierlich neue Maßstäbe für Qualität und Innovation.'
+      bio: 'Mit über 20 Jahren Erfahrung bringt Thomas Leidenschaft und Expertise in jede Klasse. Seine Hingabe hat Predators zu einem führenden Namen im Kampfsporttraining gemacht.'
     },
     {
       name: 'Lena',
       role: 'Kindertrainerin',
       image: 'https://picsum.photos/200/200?random=2',
-      bio: 'Lena hat sich auf die Arbeit mit jungen Athleten spezialisiert und fördert von klein auf Disziplin, Selbstvertrauen und die Liebe zu Kampfkünsten. Ihr engagierter Lehrstil macht jede Klasse zu einem Abenteuer für unsere jüngsten Predators.'
+      bio: 'Lena fördert von klein auf Disziplin, Selbstvertrauen und die Liebe zu Kampfkünsten. Ihr engagierter Lehrstil macht jede Klasse zu einem Abenteuer für unsere jüngsten Predators.'
     },
     {
       name: 'Annali Brugger',
       role: 'Fitness-Boxen Trainerin',
       image: 'https://picsum.photos/200/200?random=3',
-      bio: 'Annali Brugger ist unsere Expertin für Fitness-Boxen. Als erfahrene und aktive Kämpferin bringt sie eine einzigartige Perspektive in ihre Kurse ein. Ihr Training kombiniert effektive Boxtechniken mit intensivem Konditionstraining, um Körper und Geist gleichermaßen herauszufordern.'
+      bio: 'Als erfahrene Kämpferin kombiniert Annali effektive Boxtechniken mit intensivem Konditionstraining, um Körper und Geist gleichermaßen herauszufordern.'
     }
   ];
 
   let visible = false;
-  let activeTrainer = trainers[0];
+  let currentTrainer = 0;
+  let isMobile = false;
+  let startX;
 
-  function setActiveTrainer(trainer) {
-    activeTrainer = trainer;
+  function nextTrainer() {
+    currentTrainer = (currentTrainer + 1) % trainers.length;
+  }
+
+  function prevTrainer() {
+    currentTrainer = (currentTrainer - 1 + trainers.length) % trainers.length;
+  }
+
+  function handleTouchStart(event) {
+    startX = event.touches[0].clientX;
+  }
+
+  function handleTouchEnd(event) {
+    const endX = event.changedTouches[0].clientX;
+    const diff = startX - endX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        nextTrainer();
+      } else {
+        prevTrainer();
+      }
+    }
   }
 
   onMount(() => {
@@ -41,39 +63,60 @@
     const section = document.querySelector('.trainers');
     observer.observe(section);
 
-    return () => observer.disconnect();
+    const checkMobile = () => {
+      isMobile = window.innerWidth <= 768;
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', checkMobile);
+    };
   });
 </script>
 
 <section class="trainers" class:visible>
   <div class="container">
     <h2 class="slide-in gradient-text">Unsere Experten-Trainer</h2>
-    <div class="trainer-showcase">
-      <div class="trainer-list">
+    
+    {#if isMobile}
+      <div class="trainer-mobile-container" 
+           on:touchstart={handleTouchStart} 
+           on:touchend={handleTouchEnd}>
         {#each trainers as trainer, index}
-          <div 
-            class="trainer-item fade-in" 
-            class:active={trainer === activeTrainer}
-            on:click={() => setActiveTrainer(trainer)}
-            on:keydown={(e) => e.key === 'Enter' && setActiveTrainer(trainer)}
-            style="animation-delay: {index * 0.2}s"
-            tabindex="0"
-          >
+          <div class="trainer-slide" class:active={index === currentTrainer}>
             <img src={trainer.image} alt={trainer.name} />
-            <h3>{trainer.name}</h3>
-            <h4>{trainer.role}</h4>
+            <div class="trainer-info">
+              <h3>{trainer.name}</h3>
+              <h4>{trainer.role}</h4>
+              <p>{trainer.bio}</p>
+            </div>
+          </div>
+        {/each}
+        <div class="mobile-navigation">
+          <button on:click={prevTrainer}>&lt;</button>
+          <span>{currentTrainer + 1} / {trainers.length}</span>
+          <button on:click={nextTrainer}>&gt;</button>
+        </div>
+      </div>
+    {:else}
+      <div class="trainer-grid">
+        {#each trainers as trainer, index}
+          <div class="trainer-item fade-in" style="animation-delay: {index * 0.2}s">
+            <div class="trainer-image">
+              <img src={trainer.image} alt={trainer.name} />
+            </div>
+            <div class="trainer-info">
+              <h3>{trainer.name}</h3>
+              <h4>{trainer.role}</h4>
+              <p>{trainer.bio}</p>
+            </div>
           </div>
         {/each}
       </div>
-      <div class="trainer-details fade-in">
-        <img src={activeTrainer.image} alt={activeTrainer.name} />
-        <div class="trainer-info">
-          <h3>{activeTrainer.name}</h3>
-          <h4>{activeTrainer.role}</h4>
-          <p>{activeTrainer.bio}</p>
-        </div>
-      </div>
-    </div>
+    {/if}
   </div>
 </section>
 
@@ -98,82 +141,39 @@
     letter-spacing: -0.02em;
   }
 
-  .trainer-showcase {
+  .trainer-grid {
     display: flex;
+    justify-content: space-between;
     gap: 2rem;
-  }
-
-  .trainer-list {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
   }
 
   .trainer-item {
+    flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    text-align: center;
   }
 
-  .trainer-item:hover, .trainer-item.active {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateX(10px);
-  }
-
-  .trainer-item img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
-  .trainer-item h3 {
-    font-size: 1.2rem;
-    margin: 0;
-  }
-
-  .trainer-item h4 {
-    font-size: 0.9rem;
-    margin: 0;
-    color: var(--secondary-text-color);
-  }
-
-  .trainer-details {
-    flex: 2;
-    display: flex;
-    gap: 2rem;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .trainer-details:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-  }
-
-  .trainer-details img {
+  .trainer-image {
     width: 200px;
     height: 200px;
     border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .trainer-image img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 
-  .trainer-info {
-    flex: 1;
-  }
-
   .trainer-info h3 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 0.5rem;
+    color: var(--primary-color);
   }
 
   .trainer-info h4 {
@@ -183,8 +183,44 @@
   }
 
   .trainer-info p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.6;
+    color: var(--secondary-text-color);
+  }
+
+  .trainer-mobile-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trainer-slide {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .trainer-slide.active {
+    display: flex;
+  }
+
+  .mobile-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .mobile-navigation button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    cursor: pointer;
+  }
+
+  .mobile-navigation span {
+    margin: 0 1rem;
     color: var(--secondary-text-color);
   }
 
@@ -206,39 +242,6 @@
     transform: translateY(0);
   }
 
-  @media (max-width: 1024px) {
-    .trainers {
-      padding: 6rem 0;
-    }
-
-    h2 {
-      font-size: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .trainer-showcase {
-      flex-direction: column;
-    }
-
-    .trainer-list {
-      flex-direction: row;
-      overflow-x: auto;
-      padding-bottom: 1rem;
-    }
-
-    .trainer-item {
-      flex: 0 0 auto;
-      width: 200px;
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .trainer-item img {
-      width: 100px;
-      height: 100px;
-    }
-  }
-
   @media (max-width: 768px) {
     .trainers {
       padding: 4rem 0;
@@ -249,33 +252,21 @@
       margin-bottom: 2rem;
     }
 
-    .trainer-details {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .trainer-details img {
+    .trainer-image {
       width: 150px;
       height: 150px;
     }
-  }
-
-  @media (max-width: 480px) {
-    h2 {
-      font-size: 2rem;
-    }
 
     .trainer-info h3 {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
     }
 
     .trainer-info h4 {
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
 
     .trainer-info p {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
   }
 </style>
